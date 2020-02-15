@@ -12,3 +12,11 @@ func init() {
 		}	
 	}
 }
+
+
+func GetUser(number string) User {
+	return User{
+		Number: number,
+		PW: "",
+	}
+}
