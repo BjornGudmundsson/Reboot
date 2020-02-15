@@ -1,40 +1,12 @@
 package main
 
 import (
-	"crypto/sha256"
-	"encoding/hex"
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"github.com/BjornGudmundsson/Reboot/insurances"
 	"github.com/BjornGudmundsson/Reboot/users"
 )
-
-func SignupForm(w http.ResponseWriter, req *http.Request) {
-	j := json.NewDecoder(req.Body)
-	var js users.User
-	e := j.Decode(&js)
-	if e != nil {
-		fmt.Println(req.Body)
-		fmt.Println(e.Error())
-		w.WriteHeader(http.StatusBadRequest)
-		return
-	}
-	ph := js.Number
-	pw := js.PW
-	h := sha256.Sum256([]byte(pw))
-	hex := hex.EncodeToString(h[:])
-	u := users.User{
-		PW:     hex,
-		Number: ph,
-	}
-	e = users.WriteUserToDB(u)
-	if e != nil {
-		w.WriteHeader(http.StatusBadRequest)
-	} else {
-	}
-}
 
 func GetCookie(phone string) *http.Cookie {
 	return &http.Cookie{
@@ -44,7 +16,9 @@ func GetCookie(phone string) *http.Cookie {
 }
 
 func LoginForm(w http.ResponseWriter, req *http.Request) {
-
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+	w.Header().Set("Access-Control-Allow-Headers: Content-Type", "Authorization")
 	j := json.NewDecoder(req.Body)
 	var js users.User
 	e := j.Decode(&js)
@@ -53,18 +27,11 @@ func LoginForm(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	ph := js.Number
-	pw := js.PW
-	h := sha256.Sum256([]byte(pw))
-	hex := hex.EncodeToString(h[:])
-	u := users.User{
-		PW:     hex,
-		Number: ph,
-	}
 	e = users.CheckIfUserExists(ph)
 	if e != nil {
-		users.WriteUserToDB(u)
+		users.WriteUserToDB(ph)
 	}
-	e = users.LoginUser(u)
+	e = users.LoginUser(ph)
 	if e != nil {
 		w.WriteHeader(http.StatusBadRequest)
 	} else {
@@ -77,5 +44,6 @@ func main() {
 	http.HandleFunc("/loginForm", LoginForm)
 	http.HandleFunc("/addInsurance", insurances.AcceptInsurance)
 	http.HandleFunc("/myInsurances", insurances.GetMyInsurances)
+	http.HandleFunc("/search", insurances.SearchForInsurance)
 	http.ListenAndServe(":8084", nil)
 }
