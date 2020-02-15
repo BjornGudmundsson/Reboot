@@ -22,6 +22,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 Reboot
+<<<<<<< HEAD
 
 *.exe
 *.txt
+=======
+db.txt
+>>>>>>> 59c3fa70b2703ada454ec856c38157d27e01d7b2

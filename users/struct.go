@@ -3,7 +3,6 @@ package users
 import (
 	"bufio"
 	"errors"
-	"fmt"
 	"os"
 	"strings"
 )
@@ -25,11 +24,10 @@ func Exists(fn string) bool {
 
 type User struct {
 	Number string
-	PW     string
 }
 
 func (u User) String() string {
-	return u.Number + " " + u.PW
+	return u.Number + " " + "PW"
 }
 
 func WriteUserToDB(u User) error {
@@ -60,7 +58,6 @@ func CheckIfUserExists(number string) error {
 		l := scanner.Text()
 		spl := strings.Split(l, " ")
 		nbr := spl[0]
-		fmt.Println(nbr)
 		if nbr == number {
 			return nil
 		}
@@ -79,9 +76,8 @@ func LoginUser(u User) error {
 		l := scanner.Text()
 		spl := strings.Split(l, " ")
 		nbr := spl[0]
-		pw := spl[1]
 
-		if nbr == u.Number && pw == u.PW {
+		if nbr == u.Number {
 			return nil
 		}
 	}
