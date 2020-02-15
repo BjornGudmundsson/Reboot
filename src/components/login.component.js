@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export default class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { Number: "" };
+    this.state = { PW: "" };
     this.handleChangeNum = this.handleChangeNum.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -42,6 +42,7 @@ export default class Login extends Component {
   async handleSubmit(e) {
     e.preventDefault();
     console.log(this.state);
+
     const a = await this.request(this.state);
     console.log(a);
 
