@@ -6,6 +6,7 @@ import (
 
 	"github.com/BjornGudmundsson/Reboot/insurances"
 	"github.com/BjornGudmundsson/Reboot/users"
+	"fmt"
 )
 
 func GetCookie(phone string) *http.Cookie {
