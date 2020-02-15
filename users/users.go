@@ -1,7 +1,9 @@
 package users
 
-import "os"
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 func init() {
 	if !Exists("db.txt") {
@@ -9,14 +11,12 @@ func init() {
 		_, e := os.Create("db.txt")
 		if e != nil {
 			panic(e)
-		}	
+		}
 	}
 }
-
 
 func GetUser(number string) User {
 	return User{
 		Number: number,
-		PW: "",
 	}
 }

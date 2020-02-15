@@ -4,6 +4,8 @@ import "github.com/BjornGudmundsson/Reboot/users"
 
 var insurances map[string]Insurance
 
+var availableInsurance []Insurance
+
 func init() {
 	insurances = make(map[string]Insurance, 0)
 }

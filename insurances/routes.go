@@ -1,6 +1,7 @@
 package insurances
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"strconv"
@@ -21,6 +22,7 @@ func GetMyInsurances(w http.ResponseWriter, req *http.Request) {
 	for _, i := range arr {
 		s += i.String() + ";"
 	}
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Write([]byte(s))
 }
 
@@ -41,6 +43,28 @@ func AcceptInsurance(w http.ResponseWriter, req *http.Request) {
 	}
 	i := GetInsuranceFromId(uint32(id))
 	AddInsurance(users.GetUser(phone), i, 0)
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(http.StatusOK)
 	fmt.Println(insurances)
+}
+
+func SearchForInsurance(w http.ResponseWriter, req *http.Request) {
+	_, e := req.Cookie("Reboot")
+	if e != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	var buy InsuranceBuy
+	j := json.NewDecoder(req.Body)
+	e = j.Decode(&buy)
+	if e != nil {
+		w.WriteHeader(http.StatusBadRequest)
+	}
+	i, eI := FindInsuranceThatMatches(buy)
+	if eI != nil {
+		w.WriteHeader(http.StatusNoContent)
+		return
+	}
+	w.Write([]byte(i.String()))
+	w.WriteHeader(http.StatusOK)
 }
