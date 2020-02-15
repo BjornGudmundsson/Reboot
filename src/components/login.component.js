@@ -17,11 +17,12 @@ export default class Login extends Component {
     var xhr = new XMLHttpRequest();
 
     console.log(this.state);
-    xhr.open("POST", "http://localhost:8084");
+    xhr.open("POST", "http://localhost:8084/loginForm");
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.send(JSON.stringify(this.state));
     this.setState = { Number: "" };
     xhr.addEventListener("load", () => {
+      console.log(xhr.status);
       if (xhr.status === 200) {
         this.props.history.push("/main");
       }
