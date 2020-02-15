@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export default class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { Number: "" };
+    this.state = { PW: "" };
     this.handleChangeNum = this.handleChangeNum.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -17,7 +17,7 @@ export default class Login extends Component {
     var xhr = new XMLHttpRequest();
 
     console.log(this.state);
-    xhr.open("POST", "https://localhost:8084/loginForm");
+    xhr.open("POST", "http://localhost:8084/loginForm");
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.send(JSON.stringify(this.state));
     this.setState = { Number: "" };
