@@ -18,13 +18,14 @@ export default class Login extends Component {
 
     console.log(this.state);
     xhr.open("POST", "http://localhost:8084");
-    xhr.send();
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.send(JSON.stringify(this.state));
+    this.setState = { Number: "" };
     xhr.addEventListener("load", () => {
       if (xhr.status === 200) {
         this.props.history.push("/main");
       }
     });
-    this.setState = { Number: "" };
   }
   render() {
     return (
