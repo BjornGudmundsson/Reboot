@@ -89,7 +89,8 @@ html,
   box-sizing: border-box;
 }
 body {
-  background: #1c8ef9 !important;
+  /* This is the main background color */
+  background: #FFBA00 !important;
   min-height: 100vh;
   display: flex;
   font-weight: 400;
