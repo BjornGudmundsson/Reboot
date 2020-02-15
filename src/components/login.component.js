@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export default class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { PW: "" };
+    this.state = { Number: "" };
     this.handleChangeNum = this.handleChangeNum.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
