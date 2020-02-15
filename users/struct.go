@@ -2,6 +2,10 @@ package users
 
 import (
 	"bufio"
+	"crypto/ecdsa"
+	"crypto/elliptic"
+	"crypto/rand"
+	"encoding/hex"
 	"errors"
 	"os"
 	"strings"
@@ -24,13 +28,27 @@ func Exists(fn string) bool {
 
 type User struct {
 	Number string
+	Key    string
 }
 
 func (u User) String() string {
-	return u.Number + " " + "PW"
+	return u.Number + " " + u.Key
 }
 
-func WriteUserToDB(u User) error {
+func WriteUserToDB(n string) error {
+	k, eK := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
+	if eK != nil {
+		return eK
+	}
+	t, e1 := k.X.MarshalText()
+	if e1 != nil {
+		return e1
+	}
+	h := hex.EncodeToString(t)
+	u := User{
+		Number: n,
+		Key:    h,
+	}
 	exists := CheckIfUserExists(u.Number)
 	if exists == nil {
 		return errors.New("Already exists")
@@ -65,7 +83,7 @@ func CheckIfUserExists(number string) error {
 	return errors.New("This user does not exist")
 }
 
-func LoginUser(u User) error {
+func LoginUser(u string) error {
 	f, e := os.OpenFile("db.txt", os.O_RDONLY, os.ModeAppend)
 	if e != nil {
 		return e
@@ -77,7 +95,7 @@ func LoginUser(u User) error {
 		spl := strings.Split(l, " ")
 		nbr := spl[0]
 
-		if nbr == u.Number {
+		if nbr == u {
 			return nil
 		}
 	}

@@ -5,6 +5,10 @@ import (
 	"strconv"
 )
 
+var insurance1 Insurance
+var insurance2 Insurance
+var insurance3 Insurance
+
 type Insurance struct {
 	Name      string
 	Payment   int
@@ -28,9 +32,12 @@ func (i Insurance) String() string {
 }
 
 func GetInsuranceFromId(id uint32) Insurance {
-	return Insurance{
-		Desc: "This is a demo",
+	for _, i := range availableInsurance {
+		if i.ID == id {
+			return i
+		}
 	}
+	return Insurance{}
 }
 
 func FindInsuranceThatMatches(buy InsuranceBuy) (Insurance, error) {
