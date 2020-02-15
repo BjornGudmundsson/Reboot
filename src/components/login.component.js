@@ -43,6 +43,8 @@ export default class Login extends Component {
     e.preventDefault();
     console.log(this.state);
     const a = await this.request(this.state);
+    console.log(a);
+
     if (a === 200) {
       this.props.history.push("/main");
     }

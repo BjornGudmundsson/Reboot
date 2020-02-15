@@ -18,7 +18,13 @@ func GetCookie(phone string) *http.Cookie {
 func LoginForm(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-	w.Header().Set("Access-Control-Allow-Headers: Content-Type", "Authorization")
+	w.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token")
+	w.Header().Set("Access-Control-Allow-Credentials", "True")
+	if req.Method == "OPTIONS" {
+		w.WriteHeader(http.StatusOK)
+		return
+	}
+
 	j := json.NewDecoder(req.Body)
 	var js users.User
 	e := j.Decode(&js)
@@ -33,7 +39,8 @@ func LoginForm(w http.ResponseWriter, req *http.Request) {
 	}
 	e = users.LoginUser(ph)
 	if e != nil {
-		w.WriteHeader(http.StatusBadRequest)
+		// w.WriteHeader(http.StatusBadRequest)
+		w.WriteHeader(http.StatusOK)
 	} else {
 		http.SetCookie(w, GetCookie(ph))
 		w.WriteHeader(http.StatusOK)
@@ -41,6 +48,7 @@ func LoginForm(w http.ResponseWriter, req *http.Request) {
 }
 
 func main() {
+	fmt.Println("Message")
 	http.HandleFunc("/loginForm", LoginForm)
 	http.HandleFunc("/addInsurance", insurances.AcceptInsurance)
 	http.HandleFunc("/myInsurances", insurances.GetMyInsurances)
