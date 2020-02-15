@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export default class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { PW: "" };
+    this.state = { Number: "" };
     this.handleChangeNum = this.handleChangeNum.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -12,22 +12,40 @@ export default class Login extends Component {
     this.setState({ Number: event.target.value });
   }
 
-  handleSubmit(e) {
+  async request(data) {
+    const url = `http://localhost:8084/loginForm`;
+    let options = {};
+    console.log(data);
+    if (data) {
+      options = {
+        body: JSON.stringify(data),
+        headers: {
+          "content-type": "application/json",
+          origin: "http://localhost:3000",
+          accept: "application/json"
+        },
+        method: "POST"
+      };
+      console.log(options);
+    } else {
+      options = {
+        headers: {},
+        method: "POST"
+      };
+    }
+
+    const response = await fetch(url, options);
+
+    return response.status;
+  }
+
+  async handleSubmit(e) {
     e.preventDefault();
-    var xhr = new XMLHttpRequest();
-
     console.log(this.state);
-    xhr.open("POST", "http://localhost:8084/loginForm");
-    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhr.send(JSON.stringify(this.state));
-    this.setState = { Number: "" };
-
-    xhr.addEventListener("load", () => {
-      console.log(xhr.status);
-      if (xhr.status === 200) {
-        this.props.history.push("/main");
-      }
-    });
+    const a = await this.request(this.state);
+    if (a === 200) {
+      this.props.history.push("/main");
+    }
   }
   render() {
     return (
