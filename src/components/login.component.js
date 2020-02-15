@@ -56,7 +56,7 @@ export default class Login extends Component {
         <h3>Sign In</h3>
 
         <div className="form-group">
-          <label>Phone number</label>
+          <label>Fone number</label>
           <input
             type="text"
             value={this.state.Number}
