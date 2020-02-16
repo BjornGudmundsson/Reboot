@@ -7,7 +7,6 @@ import (
 
 	"github.com/BjornGudmundsson/Reboot/insurances"
 	"github.com/BjornGudmundsson/Reboot/users"
-	"fmt"
 )
 
 func init() {

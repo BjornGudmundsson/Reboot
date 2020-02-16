@@ -19,15 +19,13 @@ type Insurance struct {
 
 type InsuranceBuy struct {
 	Name string
-	Min  int
-	Max  int
 }
 
 func (i Insurance) String() string {
-	ret := ""
-	ret += "Name:" + i.Name + "-"
-	ret += "Payment:" + strconv.Itoa(int(i.Payment)) + "-"
-	ret += "Desc:" + i.Desc
+	ret := "{"
+	ret += "\"Name\":" + "\"" + i.Name + "\"" + ","
+	ret += "\"Payment\":" + "\n" + strconv.Itoa(int(i.Payment)) + "\n" + ","
+	ret += "\"Desc\":" + "\"" + i.Desc + "\n" + "}"
 	return ret
 }
 
@@ -42,7 +40,7 @@ func GetInsuranceFromId(id uint32) Insurance {
 
 func FindInsuranceThatMatches(buy InsuranceBuy) (Insurance, error) {
 	for _, b := range availableInsurance {
-		if b.Name == buy.Name && (buy.Min <= b.Payment && buy.Max >= b.Payment) {
+		if b.Name == buy.Name {
 			return b, nil
 		}
 	}
