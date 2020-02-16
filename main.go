@@ -28,11 +28,12 @@ func LoginForm(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
 	w.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token")
-	w.Header().Set("Access-Control-Allow-Credentials", "True")
+	w.Header().Set("Access-Control-Allow-Credentials", "true")
 	if req.Method == "OPTIONS" {
 		w.WriteHeader(http.StatusOK)
 		return
 	}
+	http.
 
 	j := json.NewDecoder(req.Body)
 	var js users.User
