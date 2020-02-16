@@ -18,8 +18,9 @@ func init() {
 
 func GetCookie(phone string) *http.Cookie {
 	return &http.Cookie{
-		Name:  "Reboot",
-		Value: phone,
+		Name:   "Reboot",
+		Value:  phone,
+		Domain: "stuff.localhost.com",
 	}
 }
 
