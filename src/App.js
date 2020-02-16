@@ -8,6 +8,8 @@ import Main from "./components/main.component";
 import Option1 from "./components/option1.component";
 import Option2 from "./components/option2.component";
 import Option3 from "./components/option3.component";
+import Insurances from "./components/insurances.component";
+import Header from "./components/header.component";
 
 function App() {
   return (
@@ -22,11 +24,18 @@ function App() {
                     Main
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to={"/insurances"}>
+                    Your page
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
         </nav>
-
+        {/* <div className="insurance-header">
+            <Route path="/insurances" component={Header} />
+          </div> */}
         <div className="auth-wrapper">
           <div className="auth-inner">
             <Switch>
@@ -36,6 +45,7 @@ function App() {
               <Route path="/option1" component={Option1} />
               <Route path="/option2" component={Option2} />
               <Route path="/option3" component={Option3} />
+              <Route path="/insurances" component={Insurances} />
             </Switch>
           </div>
         </div>

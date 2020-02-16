@@ -20,7 +20,7 @@ func init() {
 	insurances = make(map[string]Insurance, 0)
 	insurance1.Desc = "This is a perfectly fine description"
 	insurance2.Desc = "This is not a perfectly fine description"
-	insurance3.Desc = "WTF is this desc"
+	insurance3.Desc = "Is bjo dumb?"
 	insurance1.Payment = 1500
 	insurance2.Payment = 2500
 	insurance3.Payment = 3500

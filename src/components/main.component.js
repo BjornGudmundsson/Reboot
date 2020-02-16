@@ -5,17 +5,23 @@ export default class SignUp extends Component {
   render() {
     return (
       <form>
-        <h3>My pages</h3>
+        <h3>Select insurance</h3>
         <div className="form-group">
-          <Dropdown className="dropdown">
+          <Dropdown className="dropdown mainbtn">
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               Choose Insurance
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item href="/option1">Health Insurance</Dropdown.Item>
-              <Dropdown.Item href="/option2">Car Insurance</Dropdown.Item>
-              <Dropdown.Item href="/option3">Home Insurance</Dropdown.Item>
+              <Dropdown.Item className="drpdwn" href="/option1">
+                Health Insurance
+              </Dropdown.Item>
+              <Dropdown.Item className="drpdwn" href="/option2">
+                Car Insurance
+              </Dropdown.Item>
+              <Dropdown.Item className="drpdwn" href="/option3">
+                Home Insurance
+              </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </div>
