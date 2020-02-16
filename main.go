@@ -33,8 +33,6 @@ func LoginForm(w http.ResponseWriter, req *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		return
 	}
-	http.
-
 	j := json.NewDecoder(req.Body)
 	var js users.User
 	e := j.Decode(&js)
