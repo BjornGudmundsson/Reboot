@@ -12,7 +12,12 @@ import (
 func GetMyInsurances(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-	w.Header().Set("Access-Control-Allow-Headers: Content-Type", "Authorization")
+	w.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token")
+	w.Header().Set("Access-Control-Allow-Credentials", "True")
+	if req.Method == "OPTIONS" {
+		w.WriteHeader(http.StatusOK)
+		return
+	}
 	var phone string
 	c, e := req.Cookie("Reboot")
 	if e != nil {
@@ -32,7 +37,12 @@ func GetMyInsurances(w http.ResponseWriter, req *http.Request) {
 func AcceptInsurance(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-	w.Header().Set("Access-Control-Allow-Headers: Content-Type", "Authorization")
+	w.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token")
+	w.Header().Set("Access-Control-Allow-Credentials", "True")
+	if req.Method == "OPTIONS" {
+		w.WriteHeader(http.StatusOK)
+		return
+	}
 	var phone string
 	c, e := req.Cookie("Reboot")
 	if e != nil {
@@ -65,7 +75,12 @@ func AcceptInsurance(w http.ResponseWriter, req *http.Request) {
 func SearchForInsurance(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-	w.Header().Set("Access-Control-Allow-Headers: Content-Type", "Authorization")
+	w.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token")
+	w.Header().Set("Access-Control-Allow-Credentials", "True")
+	if req.Method == "OPTIONS" {
+		w.WriteHeader(http.StatusOK)
+		return
+	}
 	var phone string
 	c, e := req.Cookie("Reboot")
 	if e != nil {
