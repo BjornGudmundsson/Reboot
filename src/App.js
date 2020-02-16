@@ -5,6 +5,9 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import Login from "./components/login.component";
 import Main from "./components/main.component";
+import Option1 from "./components/option1.component";
+import Option2 from "./components/option2.component";
+import Option3 from "./components/option3.component";
 
 function App() {
   return (
@@ -35,6 +38,9 @@ function App() {
               <Route exact path="/" component={Login} />
               <Route path="/sign-in" component={Login} />
               <Route path="/main" component={Main} />
+              <Route path="/option1" component={Option1} />
+              <Route path="/option2" component={Option2} />
+              <Route path="/option3" component={Option3} />
             </Switch>
           </div>
         </div>
