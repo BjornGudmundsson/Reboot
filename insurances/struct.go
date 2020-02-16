@@ -25,7 +25,7 @@ func (i Insurance) String() string {
 	ret := "{"
 	ret += "\"Name\":" + "\"" + i.Name + "\"" + ","
 	ret += "\"Payment\":" + "\n" + strconv.Itoa(int(i.Payment)) + "\n" + ","
-	ret += "\"Desc\":" + "\"" + i.Desc + "\n" + "}"
+	ret += "\"Desc\":" + "\"" + i.Desc + "\"\n" + "}"
 	return ret
 }
 
