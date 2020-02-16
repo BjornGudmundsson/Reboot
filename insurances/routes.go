@@ -101,5 +101,4 @@ func SearchForInsurance(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	w.Write([]byte(i.String()))
-	w.WriteHeader(http.StatusOK)
 }
