@@ -18,9 +18,9 @@ var availableInsurance []Insurance
 
 func init() {
 	insurances = make(map[string]Insurance, 0)
-	insurance1.Desc = "This is a perfectly fine description"
-	insurance2.Desc = "This is not a perfectly fine description"
-	insurance3.Desc = "Is bjo dumb?"
+	insurance1.Desc = "Get taken care, when you can't take care of yourself"
+	insurance2.Desc = "Make sure the important things are taken care of - your car"
+	insurance3.Desc = "For when life brings you lemons"
 	insurance1.Payment = 1500
 	insurance2.Payment = 2500
 	insurance3.Payment = 3500
