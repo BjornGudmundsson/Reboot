@@ -7,6 +7,11 @@
   pointer-events: none;
 }
 
+.hecks {
+  position: relative;
+  top: -100px;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -14,14 +19,14 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #0d45b4;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: #3B5998;
+  color: #3b5998;
 }
 
 .App-link {
@@ -35,4 +40,41 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.navbar {
+  background-color: #011727;
+}
+
+.nav-item {
+  border: 1px solid #000000;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+  transition: background-color 0.2s linear;
+}
+
+.nav-item:hover {
+  background-color: #ffba00;
+}
+
+.nav-link {
+  color: black !important;
+}
+
+#dropdown-basic {
+  width: 100%;
+}
+
+.dropdown-menu {
+  width: 100%;
+}
+
+.drpdwn a {
+  width: 100%;
+  transition: background-color 0.3s linear;
+}
+
+.drpdwn:hover {
+  background-color: #ffba00;
 }

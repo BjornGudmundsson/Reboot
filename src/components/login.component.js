@@ -22,7 +22,8 @@ export default class Login extends Component {
         headers: {
           "content-type": "application/json",
           origin: "http://localhost:3000",
-          accept: "application/json"
+          accept: "application/json",
+          "Access-Control-Allow-Credentials": true
         },
         method: "POST"
       };
@@ -56,7 +57,7 @@ export default class Login extends Component {
         <h3>Sign In</h3>
 
         <div className="form-group">
-          <label>Fone number</label>
+          <label>Phone number</label>
           <input
             type="text"
             value={this.state.Number}
