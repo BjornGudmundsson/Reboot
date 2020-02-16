@@ -7,7 +7,10 @@ import (
 	"strings"
 )
 
+var DB map[string]User
+
 func init() {
+	DB = make(map[string]User)
 	if !Exists("db.txt") {
 		_, e := os.Create("db.txt")
 		if e != nil {
@@ -17,6 +20,9 @@ func init() {
 }
 
 func GetUser(number string) (User, error) {
+	if v, ok := DB[number]; ok {
+		return v, nil
+	}
 	f, e := os.OpenFile("db.txt", os.O_RDONLY, os.ModeAppend)
 	if e != nil {
 		return User{}, e

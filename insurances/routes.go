@@ -13,19 +13,19 @@ func GetMyInsurances(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
 	w.Header().Set("Access-Control-Allow-Headers: Content-Type", "Authorization")
+	var phone string
 	c, e := req.Cookie("Reboot")
 	if e != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		return
+		phone = "8446063"
+	} else {
+		phone = c.Value
 	}
-	phone := c.Value
 	u, _ := users.GetUser(phone)
 	arr := GetInsurances(u)
 	s := ""
 	for _, i := range arr {
 		s += i.String() + ";"
 	}
-	//w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Write([]byte(s))
 }
 
@@ -33,18 +33,17 @@ func AcceptInsurance(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
 	w.Header().Set("Access-Control-Allow-Headers: Content-Type", "Authorization")
+	var phone string
 	c, e := req.Cookie("Reboot")
 	if e != nil {
-		fmt.Println("Bjo")
-		w.WriteHeader(http.StatusBadRequest)
-		return
+		phone = "8446063"
+	} else {
+		phone = c.Value
 	}
 	b := make([]byte, 100)
 	req.Body.Read(b)
-	phone := c.Value
 	id, e := strconv.Atoi(string(b[:1]))
 	if e != nil {
-		fmt.Println("Bjo")
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
@@ -58,7 +57,7 @@ func AcceptInsurance(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	AddInsurance(u, i, id)
-
+	fmt.Println(insurances)
 	w.WriteHeader(http.StatusOK)
 	fmt.Println(insurances)
 }
@@ -67,11 +66,14 @@ func SearchForInsurance(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
 	w.Header().Set("Access-Control-Allow-Headers: Content-Type", "Authorization")
-	_, e := req.Cookie("Reboot")
+	var phone string
+	c, e := req.Cookie("Reboot")
 	if e != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		return
+		phone = "8446063"
+	} else {
+		phone = c.Value
 	}
+	fmt.Println(phone)
 	var buy InsuranceBuy
 	j := json.NewDecoder(req.Body)
 	e = j.Decode(&buy)

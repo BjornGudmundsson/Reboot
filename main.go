@@ -2,11 +2,19 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/BjornGudmundsson/Reboot/insurances"
 	"github.com/BjornGudmundsson/Reboot/users"
 )
+
+func init() {
+	e := users.CheckIfUserExists("8446063")
+	if e != nil {
+		users.WriteUserToDB("8446063")
+	}
+}
 
 func GetCookie(phone string) *http.Cookie {
 	return &http.Cookie{
@@ -33,22 +41,13 @@ func LoginForm(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	ph := js.Number
-	e = users.CheckIfUserExists(ph)
-	if e != nil {
-		users.WriteUserToDB(ph)
-	}
-	e = users.LoginUser(ph)
-	if e != nil {
-		// w.WriteHeader(http.StatusBadRequest)
-		w.WriteHeader(http.StatusOK)
-	} else {
-		http.SetCookie(w, GetCookie(ph))
-		w.WriteHeader(http.StatusOK)
-	}
+	users.WriteUserToDB(ph)
+	fmt.Println(users.DB)
+	http.SetCookie(w, GetCookie(ph))
+	w.WriteHeader(http.StatusOK)
 }
 
 func main() {
-	fmt.Println("Message")
 	http.HandleFunc("/loginForm", LoginForm)
 	http.HandleFunc("/addInsurance", insurances.AcceptInsurance)
 	http.HandleFunc("/myInsurances", insurances.GetMyInsurances)

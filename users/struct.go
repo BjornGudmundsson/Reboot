@@ -29,6 +29,7 @@ func Exists(fn string) bool {
 type User struct {
 	Number string
 	Key    string
+	K      *ecdsa.PrivateKey
 }
 
 func (u User) String() string {
@@ -48,20 +49,22 @@ func WriteUserToDB(n string) error {
 	u := User{
 		Number: n,
 		Key:    h,
+		K:      k,
 	}
-	exists := CheckIfUserExists(u.Number)
-	if exists == nil {
-		return errors.New("Already exists")
-	}
-	f, e := os.OpenFile("db.txt", os.O_APPEND|os.O_WRONLY, os.ModeAppend)
-	if e != nil {
-		return e
-	}
-	defer f.Close()
-	_, eW := f.WriteString(u.String() + "\n")
-	if eW != nil {
-		return eW
-	}
+	DB[n] = u
+	//exists := CheckIfUserExists(u.Number)
+	//if exists == nil {
+	//	return errors.New("Already exists")
+	//}
+	//f, e := os.OpenFile("db.txt", os.O_APPEND|os.O_WRONLY, os.ModeAppend)
+	//if e != nil {
+	//	return e
+	//}
+	//defer f.Close()
+	//_, eW := f.WriteString(u.String() + "\n")
+	//if eW != nil {
+	//	return eW
+	//}
 	return nil
 }
 
