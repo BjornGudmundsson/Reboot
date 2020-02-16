@@ -2,6 +2,7 @@ package insurances
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -26,11 +27,20 @@ func GetMyInsurances(w http.ResponseWriter, req *http.Request) {
 	}
 	u, _ := users.GetUser(phone)
 	arr := GetInsurances(u)
-	s := ""
+	s := make([]string, 0)
 	for _, i := range arr {
-		s = i.String()
+		s = append(s, i.String())
 	}
-	w.Write([]byte(s))
+	d := &ArrayJSON{
+		Objects: s,
+	}
+	b, e := json.Marshal(d)
+	if e != nil {
+		fmt.Println(e.Error())
+		w.WriteHeader(http.StatusBadRequest)
+	} else {
+		w.Write(b)
+	}
 }
 
 func AcceptInsurance(w http.ResponseWriter, req *http.Request) {
@@ -67,6 +77,10 @@ func AcceptInsurance(w http.ResponseWriter, req *http.Request) {
 	}
 	AddInsurance(u, i, id)
 	w.WriteHeader(http.StatusOK)
+}
+
+type ArrayJSON struct {
+	Objects []string
 }
 
 func SearchForInsurance(w http.ResponseWriter, req *http.Request) {
