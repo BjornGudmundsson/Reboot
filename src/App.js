@@ -18,11 +18,6 @@ function App() {
             <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  {/* <Link className="nav-link" to={"/sign-in"}>
-                    Login
-                  </Link> */}
-                </li>
-                <li className="nav-item">
                   <Link className="nav-link" to={"/main"}>
                     Main
                   </Link>
