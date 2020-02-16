@@ -28,7 +28,7 @@ func GetMyInsurances(w http.ResponseWriter, req *http.Request) {
 	arr := GetInsurances(u)
 	s := ""
 	for _, i := range arr {
-		s += i.String() + ";"
+		s = i.String()
 	}
 	w.Write([]byte(s))
 }
