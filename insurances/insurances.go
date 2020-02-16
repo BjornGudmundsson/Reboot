@@ -24,9 +24,9 @@ func init() {
 	insurance1.Payment = 1500
 	insurance2.Payment = 2500
 	insurance3.Payment = 3500
-	insurance1.Name = "health insurance"
-	insurance2.Name = "life insurance"
-	insurance3.Name = "car insurance"
+	insurance1.Name = "Health insurance"
+	insurance2.Name = "Car insurance"
+	insurance3.Name = "Life insurance"
 	insurance1.ID = 1
 	insurance2.ID = 2
 	insurance3.ID = 3
