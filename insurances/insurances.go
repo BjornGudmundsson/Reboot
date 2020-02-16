@@ -38,6 +38,7 @@ func AddInsurance(u users.User, i Insurance, t int) {
 	//fmt.Println("K: ", k)
 	h := sha256.Sum256([]byte(strconv.Itoa(int(i.ID))))
 	r, s, e := ecdsa.Sign(rand.Reader, k, h[:])
+	fmt.Println(h)
 	if e != nil {
 		panic("e")
 	}

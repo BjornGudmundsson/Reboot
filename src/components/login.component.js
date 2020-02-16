@@ -22,8 +22,7 @@ export default class Login extends Component {
         headers: {
           "content-type": "application/json",
           origin: "http://localhost:3000",
-          accept: "application/json",
-          "Access-Control-Allow-Credentials": true
+          accept: "application/json"
         },
         method: "POST"
       };

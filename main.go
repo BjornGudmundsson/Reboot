@@ -18,9 +18,8 @@ func init() {
 
 func GetCookie(phone string) *http.Cookie {
 	return &http.Cookie{
-		Name:   "Reboot",
-		Value:  phone,
-		Domain: "stuff.localhost.com",
+		Name:  "Reboot",
+		Value: phone,
 	}
 }
 
@@ -28,11 +27,12 @@ func LoginForm(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
 	w.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type, X-Auth-Token")
-	w.Header().Set("Access-Control-Allow-Credentials", "true")
+	w.Header().Set("Access-Control-Allow-Credentials", "True")
 	if req.Method == "OPTIONS" {
 		w.WriteHeader(http.StatusOK)
 		return
 	}
+
 	j := json.NewDecoder(req.Body)
 	var js users.User
 	e := j.Decode(&js)

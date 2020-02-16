@@ -69,10 +69,6 @@ func AcceptInsurance(w http.ResponseWriter, req *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
-type ArrayJSON struct {
-	Objects []string
-}
-
 func SearchForInsurance(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
