@@ -20,7 +20,7 @@ export default class SignUp extends Component {
                 Car Insurance
               </Dropdown.Item>
               <Dropdown.Item className="drpdwn" href="/option3">
-                Home Insurance
+                Life Insurance
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
