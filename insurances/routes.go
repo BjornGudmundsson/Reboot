@@ -2,7 +2,6 @@ package insurances
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -29,7 +28,7 @@ func GetMyInsurances(w http.ResponseWriter, req *http.Request) {
 	arr := GetInsurances(u)
 	s := ""
 	for _, i := range arr {
-		s += i.String() + ";"
+		s = i.String()
 	}
 	w.Write([]byte(s))
 }
@@ -67,9 +66,7 @@ func AcceptInsurance(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	AddInsurance(u, i, id)
-	fmt.Println(insurances)
 	w.WriteHeader(http.StatusOK)
-	fmt.Println(insurances)
 }
 
 func SearchForInsurance(w http.ResponseWriter, req *http.Request) {
@@ -81,17 +78,16 @@ func SearchForInsurance(w http.ResponseWriter, req *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		return
 	}
-	var phone string
+	/*var phone string
 	c, e := req.Cookie("Reboot")
 	if e != nil {
 		phone = "8446063"
 	} else {
 		phone = c.Value
-	}
-	fmt.Println(phone)
+	}*/
 	var buy InsuranceBuy
 	j := json.NewDecoder(req.Body)
-	e = j.Decode(&buy)
+	e := j.Decode(&buy)
 	if e != nil {
 		w.WriteHeader(http.StatusBadRequest)
 	}

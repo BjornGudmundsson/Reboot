@@ -42,8 +42,6 @@ func AddInsurance(u users.User, i Insurance, t int) {
 	if e != nil {
 		panic("e")
 	}
-	fmt.Println("R: ", r.String())
-	fmt.Println("S: ", s.String())
 	key := r.String() + ";" + s.String()
 	//fmt.Println("Key: ", key)
 	if _, ok := insurances[key]; !ok {
